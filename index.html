@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <title>Editor de salva `saveData.yc` para Mina the Hollower</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --hover-color: #0056b3;
+            --bg-color: #f4f7f6;
+            --container-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem 1rem;
+            box-sizing: border-box;
+        }
+
+        .wrapper {
+            display: flex;
+            gap: 2rem;
+            max-width: 900px;
+            width: 100%;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .help-container {
+            background-color: var(--container-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        h2, h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .help-container h3 {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input[type="file"],
+        input[type="number"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--hover-color);
+        }
+
+        #status {
+            margin-top: 1rem;
+            font-weight: bold;
+            min-height: 1.5em;
+        }
+
+        code {
+            background-color: #f1f1f1;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            word-break: break-word;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 0.75rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            border-left: 4px solid #ffeeba;
+        }
+
+        @media (max-width: 768px) {
+            .wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="container">
+            <h2>Editor de Huesos de Mina the Hollower</h2>
+            
+            <div class="form-group">
+                <label id="labelFile" for="fileInput">1. Sube tu archivo (saveData.yc):</label>
+                <input type="file" id="fileInput" accept=".yc">
+            </div>
+
+            <div class="form-group">
+                <label id="labelNum" for="moneyInput">2. Cantidad (Máx 99999):</label>
+                <input type="number" id="moneyInput" max="99999" min="0" placeholder="Ej: 50000">
+            </div>
+
+            <button id="applyBtn">Aplicar y Descargar</button>
+
+            <p id="status"></p>
+        </div>
+
+        <div class="help-container">
+            <div id="help-es" style="display: none;">
+                <h3>Ayuda e Instrucciones</h3>
+                <p>Este código modifica específicamente la cantidad de <strong>Huesos (Bones)</strong> en tu archivo de salva.</p>
+                
+                <p><strong>¿Dónde encuentro el archivo <code>saveData.yc</code>?</strong></p>
+                <ul>
+                    <li><strong>Windows:</strong> <code>%LOCALAPPDATA%\Yacht Club Games\Mina the Hollower\</code></li>
+                    <li><strong>Steam (Windows):</strong> <code>C:\Program Files (x86)\Steam\userdata\&lt;TuSteamID&gt;\1875580\remote\</code></li>
+                    <li><strong>macOS:</strong> <code>~/Library/Application Support/Yacht Club Games/Mina the Hollower/</code></li>
+                    <li><strong>Linux:</strong> <code>~/.local/share/Yacht Club Games/Mina the Hollower/</code></li>
+                    <li><strong>Nintendo Switch:</strong> Dentro de la carpeta <code>0100DCD01F306000</code> (requiere consola modificada y gestor de guardado).</li>
+                </ul>
+
+                <div class="warning">
+                    <strong>¡Atención!</strong> Siempre haz una copia de seguridad de tu partida original. Si tu partida se corrompe por algún error, el juego suele crear un archivo llamado <code>saveData.bak.yc</code>. Puedes borrar el archivo defectuoso y renombrar el <em>.bak.yc</em> a <code>saveData.yc</code> para restaurar tu progreso.
+                </div>
+            </div>
+
+            <div id="help-en" style="display: none;">
+                <h3>Help & Instructions</h3>
+                <p>This code specifically modifies the amount of <strong>Bones</strong> in your save file.</p>
+                
+                <p><strong>Where can I find the <code>saveData.yc</code> file?</strong></p>
+                <ul>
+                    <li><strong>Windows:</strong> <code>%LOCALAPPDATA%\Yacht Club Games\Mina the Hollower\</code></li>
+                    <li><strong>Steam (Windows):</strong> <code>C:\Program Files (x86)\Steam\userdata\&lt;YourSteamID&gt;\1875580\remote\</code></li>
+                    <li><strong>macOS:</strong> <code>~/Library/Application Support/Yacht Club Games/Mina the Hollower/</code></li>
+                    <li><strong>Linux:</strong> <code>~/.local/share/Yacht Club Games/Mina the Hollower/</code></li>
+                    <li><strong>Nintendo Switch:</strong> Inside the <code>0100DCD01F306000</code> folder (requires modded console/save manager).</li>
+                </ul>
+
+                <div class="warning">
+                    <strong>Warning!</strong> Always create a backup of your original save file. If your save file becomes corrupted, the game usually creates an automatic backup called <code>saveData.bak.yc</code>. You can delete the corrupted file and rename the <em>.bak.yc</em> to <code>saveData.yc</code> to restore your progress.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const lang = navigator.language || navigator.userLanguage;
+        const isSpanish = lang.toLowerCase().startsWith('es');
+
+        if (isSpanish) {
+            document.getElementById('help-es').style.display = 'block';
+        } else {
+            document.getElementById('help-en').style.display = 'block';
+        }
+
+        const msjs = {
+            noFile: isSpanish 
+                ? "Necesitas seleccionar un archivo primero." 
+                : "You need to select a file first.",
+            invalidNum: isSpanish 
+                ? "Asegúrate de poner algo entre 1 y 99999." 
+                : "Make sure it's between 1 and 99999.",
+            success: isSpanish 
+                ? "¡Listo! Archivo editado y descargado." 
+                : "All done! File edited and downloaded.",
+            error: isSpanish 
+                ? "Algo salió mal al leer el archivo. Inténtalo de nuevo." 
+                : "Something went wrong reading the file. Try again."
+        };
+
+        if (!isSpanish) {
+        	document.title = "Mina the Hollower 'saveData.yc' Save Editor";
+            document.querySelector('h2').textContent = "Mina the Hollower's Bones Editor";
+            document.getElementById('labelFile').textContent = "1. Upload your file (saveData.yc):";
+            document.getElementById('labelNum').textContent = "2. Amount (Max 99999):";
+            document.getElementById('applyBtn').textContent = "Apply & Download";
+        }
+
+        const moneyInput = document.getElementById('moneyInput');
+
+        moneyInput.addEventListener('input', function() {
+            if (this.value !== "") {
+                let val = parseInt(this.value, 10);
+                if (val > 99999) {
+                    this.value = 99999;
+                } else if (val < 1) {
+                    this.value = 1;
+                }
+            }
+        });
+
+        document.getElementById('applyBtn').addEventListener('click', () => {
+            const fileInput = document.getElementById('fileInput');
+            const statusMessage = document.getElementById('status');
+
+            if (!fileInput.files.length) {
+                showMessage(msjs.noFile, "red");
+                return;
+            }
+
+            const newMoneyValue = parseInt(moneyInput.value, 10);
+            if (isNaN(newMoneyValue) || newMoneyValue < 0 || newMoneyValue > 99999) {
+                showMessage(msjs.invalidNum, "red");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                let content = event.target.result;
+                
+                const moneyRegex = /sMoney:\s*\d+,/g;
+
+                if (moneyRegex.test(content)) {
+                    content = content.replace(moneyRegex, `sMoney: ${newMoneyValue},`);
+                } else {
+                    const fallbackRegex = /(sVialCountFlags:\s*\d+,)/;
+                    if (fallbackRegex.test(content)) {
+                        content = content.replace(fallbackRegex, `$1\n\t\t\tsMoney: ${newMoneyValue},`);
+                    } else {
+                        const playerFallback = /(playerName:\s*".*",)/;
+                        content = content.replace(playerFallback, `$1\n\t\t\tsMoney: ${newMoneyValue},`);
+                    }
+                }
+
+                const blob = new Blob([content], { type: "text/plain" });
+                const downloadUrl = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = file.name; 
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                URL.revokeObjectURL(downloadUrl);
+
+                showMessage(msjs.success, "green");
+            };
+
+            reader.onerror = function() {
+                showMessage(msjs.error, "red");
+            };
+
+            reader.readAsText(file);
+        });
+
+        function showMessage(text, color) {
+            const statusElement = document.getElementById('status');
+            statusElement.textContent = text;
+            statusElement.style.color = color;
+        }
+    </script>
+</body>
+</html>
