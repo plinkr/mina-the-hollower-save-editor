@@ -139,6 +139,24 @@
             border-left: 4px solid #ffeeba;
         }
 
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 1.25rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .github-link:hover {
+            color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+
         @media (max-width: 768px) {
             .wrapper {
                 flex-direction: column;
@@ -185,6 +203,11 @@
                 <div class="warning">
                     <strong>¡Atención!</strong> Siempre haz una copia de seguridad de tu partida original. Si tu partida se corrompe por algún error, el juego suele crear un archivo llamado <code>saveData.bak.yc</code>. Puedes borrar el archivo defectuoso y renombrar el <em>.bak.yc</em> a <code>saveData.yc</code> para restaurar tu progreso.
                 </div>
+
+                <a class="github-link" href="https://github.com/plinkr/mina-the-hollower-save-editor" target="_blank" rel="noopener noreferrer">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="18" height="18" alt="GitHub">
+                    Ver repositorio en GitHub
+                </a>
             </div>
 
             <div id="help-en" style="display: none;">
@@ -203,6 +226,11 @@
                 <div class="warning">
                     <strong>Warning!</strong> Always create a backup of your original save file. If your save file becomes corrupted, the game usually creates an automatic backup called <code>saveData.bak.yc</code>. You can delete the corrupted file and rename the <em>.bak.yc</em> to <code>saveData.yc</code> to restore your progress.
                 </div>
+
+                <a class="github-link" href="https://github.com/plinkr/mina-the-hollower-save-editor" target="_blank" rel="noopener noreferrer">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="18" height="18" alt="GitHub">
+                    View repository on GitHub
+                </a>
             </div>
         </div>
     </div>
