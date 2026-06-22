@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online save editor for Mina the Hollower. Modify your Bones (currency) amount in your saveData.yc file quickly and easily.">
     <link rel="icon" type="image/png" href="/favicon.png">
     <title>Editor de salva `saveData.yc` para Mina the Hollower</title>
     <style>
@@ -56,6 +57,12 @@
             max-width: 450px;
             font-size: 0.95rem;
             line-height: 1.6;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.5rem;
         }
 
         h2, h3 {
@@ -169,7 +176,7 @@
 
     <div class="wrapper">
         <div class="container">
-            <h2>Editor de Huesos de Mina the Hollower</h2>
+            <h1 id="mainHeading">Editor de Huesos de Mina the Hollower</h1>
             
             <div class="form-group">
                 <label id="labelFile" for="fileInput">1. Sube tu archivo (saveData.yc):</label>
@@ -261,11 +268,12 @@
         };
 
         if (!isSpanish) {
-        	document.title = "Mina the Hollower 'saveData.yc' Save Editor";
-            document.querySelector('h2').textContent = "Mina the Hollower's Bones Editor";
+            document.title = "Mina the Hollower 'saveData.yc' Save Editor";
+            document.getElementById('mainHeading').textContent = "Mina the Hollower's Bones Editor";
             document.getElementById('labelFile').textContent = "1. Upload your file (saveData.yc):";
             document.getElementById('labelNum').textContent = "2. Amount (Max 99999):";
             document.getElementById('applyBtn').textContent = "Apply & Download";
+            document.querySelector('meta[name="description"]').setAttribute('content', 'Free online save editor for Mina the Hollower. Modify your Bones (currency) amount in your saveData.yc file quickly and easily.');
         }
 
         const moneyInput = document.getElementById('moneyInput');
